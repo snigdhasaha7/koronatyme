@@ -27,7 +27,7 @@ public class toDoEntry {
         Calendar calendar = Calendar.getInstance();
         entryDate = calendar.getTimeInMillis();
         urgency = u;
-        int hashCode = hashCode();
+        hashCode = hashCode();
         userurgency = false;
     }
    
@@ -39,7 +39,7 @@ public class toDoEntry {
         entryDate = calendar.getTimeInMillis();
         dueDate = entryDate + 86400000; //86,400,000 millis per day
         urgency = u;
-        int hashCode = hashCode();
+        hashCode = hashCode();
         userurgency = false;
     }
     
@@ -72,6 +72,12 @@ public class toDoEntry {
         Date d = new Date(dueDate);
         String ds = d.toString();
         return ds;
+    }
+    
+    public Date getDate()
+    {
+    	Date d = new Date(dueDate);
+    	return d;
     }
     
     public String getEntryDate()
