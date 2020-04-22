@@ -19,6 +19,8 @@ public class Tree<E> {
         return anchor;
     }
     
+
+    
     public int getHeight(){
         return childHeight(anchor);
     }
@@ -29,7 +31,7 @@ public class Tree<E> {
         }
         int[] children = new int[node.numChildren()];
         for(int i = 0; i < node.numChildren(); i++){
-            children[i] = 1 + childHeight(node.getChild(i));
+            children[i] = 1 + childHeight(node.getAllChildren().get(i));
         }
         return largestInArr(children);
     }
