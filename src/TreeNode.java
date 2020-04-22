@@ -13,16 +13,18 @@ import java.util.ArrayList;
  */
 public class TreeNode <E> {
     private E elem;
-    private ArrayList<TreeNode<E>> children;
+    private PriorityQueue<TreeNode<E>> children;
     private TreeNode<E> parent;
     
     public TreeNode(E elem){
         this.elem = elem;
+        children = new PriorityQueue<>();
     }
     
     public TreeNode(E elem, TreeNode<E> parent){
         this.elem = elem;
         this.parent = parent;
+        children = new PriorityQueue<>();
     }
 
     public E getElem() {
@@ -33,15 +35,15 @@ public class TreeNode <E> {
         this.elem = elem;
     }
 
-    public ArrayList<TreeNode<E>> getChildren() {
-        return children;
-    }
+//    public PriorityQueue<TreeNode<E>> getChildren() {
+//        return children;
+//    }
     
-    public TreeNode<E> getChild(int pos){
-        return children.get(pos);
+    public TreeNode<E> getFirstChild(){
+        return children.peek();
     }
 
-    public void setChildren(ArrayList<TreeNode<E>> children) {
+    public void setChildren(PriorityQueue<TreeNode<E>> children) {
         this.children = children;
     }
 
@@ -61,8 +63,24 @@ public class TreeNode <E> {
         TreeNode<E> n = new TreeNode<E>(e, this);
         children.add(n);
     }
+    
+    public void addChild(int priority, E e){
+        TreeNode<E> n = new TreeNode<>(e, this);
+        children.add(priority, n);
+    }
 
+    public ArrayList<TreeNode<E>> getAllChildren(){
+        PriorityQueue<TreeNode<E>> local = new PriorityQueue<>(children);
+        ArrayList<TreeNode<E>> localOut = new ArrayList<>();
+        while(!local.isEmpty()){
+            localOut.add(local.poll());
+        }
+        return localOut;
+    }
+    
+    
     public E removeChild(E in){
+        ArrayList<TreeNode<E>> children = getAllChildren();
         int i = 0;
         while(i<numChildren() && !children.get(i).getElem().equals(in)){
             i++;
@@ -73,12 +91,9 @@ public class TreeNode <E> {
         return children.remove(i).getElem();
     }
 
-    public E removeChild(int pos){
-        if(pos >= numChildren()){
-            return null;
-        }else{
-            return children.remove(pos).getElem();
-        }
+    public E removeFirstChild(){
+        if(!children.isEmpty()) return children.poll().getElem();
+        return null;
     }
 
     public boolean isInternal(){
