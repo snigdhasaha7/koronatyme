@@ -31,7 +31,7 @@ public class ToDoList {
 		String x = "Your To-Do List: \n"; 
 		for(int i = 0; i < displist.length; i++)
 		{
-			x += (i + 1) + ". " + displist[i].toString() + "\n\n";
+			x += (i + 1) + ". Task: " + ((toDoEntry) displist[i]).getTask()+ "\n Due Date: " + ((toDoEntry) displist[i]).getDueDate() + "\n\n";
 		}
 		
 		return x;
