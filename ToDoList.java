@@ -12,11 +12,26 @@ public class ToDoList {
 	public void add(toDoEntry entry)
 	{
 		toDoList.add(entry); 
+		System.out.println(reminder()); 
 	}
 	
 	public toDoEntry viewMostUrgent()
 	{
 		return toDoList.peek(); 
+	}
+	
+	public String reminder()
+	{
+		if(toDoList.size() < size)
+			return ""; 
+		else if(toDoList.size() == size)
+		{
+			return "You are at your maximum size limit.";
+		}
+		else
+		{
+			return "You have exceeded your maximum size limit. Be careful not to overload!";
+		}
 	}
 	
 	public void finish()
