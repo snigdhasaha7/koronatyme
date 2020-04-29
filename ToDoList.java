@@ -21,8 +21,7 @@ public class ToDoList {
 	
 	public void finish()
 	{
-		System.out.println("Congratulations! You have finished this task: ");
-		toDoList.poll().toString(); 
+		toDoList.poll();
 	}
 	
 	public String viewList()
