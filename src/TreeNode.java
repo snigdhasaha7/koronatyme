@@ -1,16 +1,6 @@
-
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author user
- */
+//edited
 public class TreeNode <E> {
     private E elem;
     private PriorityQueue<TreeNode<E>> children;
@@ -59,14 +49,16 @@ public class TreeNode <E> {
         return children.size();
     }
         
-    public void addChild(E e){
+    public TreeNode addChild(E e){
         TreeNode<E> n = new TreeNode<E>(e, this);
         children.add(n);
+        return n;
     }
     
-    public void addChild(int priority, E e){
+    public TreeNode addChild(int priority, E e){
         TreeNode<E> n = new TreeNode<>(e, this);
         children.add(priority, n);
+        return n;
     }
 
     public ArrayList<TreeNode<E>> getAllChildren(){
