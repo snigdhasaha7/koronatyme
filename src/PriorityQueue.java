@@ -1,16 +1,6 @@
-
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author user
- */
+//EDITED
 public class PriorityQueue<E> {
 
     
@@ -47,6 +37,7 @@ public class PriorityQueue<E> {
     }
 
     public PriorityQueue(PriorityQueue other) {
+        queue = new ArrayList<>();
         while(!other.isEmpty()){
             add(other.dequeueEntry());
         }
@@ -69,7 +60,8 @@ public class PriorityQueue<E> {
     }
     
     public void add(E e){
-        queue.add(new Entry(queue.get(queue.size()-1).getKey(), e));
+        //queue.add(new Entry(queue.get(queue.size()-1).getKey(), e)); //original line
+        queue.add(new Entry(queue.size(), e));
     }
     
     public void add(int priority, E e){
