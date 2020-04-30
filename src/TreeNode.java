@@ -62,10 +62,14 @@ public class TreeNode <E> {
     }
 
     public ArrayList<TreeNode<E>> getAllChildren(){
-        PriorityQueue<TreeNode<E>> local = new PriorityQueue<>(children);
+//        PriorityQueue<TreeNode<E>> local = new PriorityQueue<>(children);
+//        System.out.print(children.peek().getElem());
         ArrayList<TreeNode<E>> localOut = new ArrayList<>();
-        while(!local.isEmpty()){
-            localOut.add(local.poll());
+        for(int i=0; i < children.size(); i++){
+            int priority = children.getPeekPriority();
+            TreeNode<E> elem = children.poll();
+            localOut.add(priority, elem);
+            children.add(priority, elem);
         }
         return localOut;
     }
