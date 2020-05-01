@@ -1,9 +1,12 @@
-
 import java.util.ArrayList;
 
 //edited
 public class Tree<E> {
     private TreeNode<E> anchor;
+
+    public TreeNode<E> getAnchor() {
+        return anchor;
+    }
     
     public Tree() {
         this.anchor = new TreeNode<E>(null, null);
@@ -23,7 +26,7 @@ public class Tree<E> {
          if (n != anchor) {
              if(n.getElem() instanceof String)
              {//System.out.println("INSTANCE OF STRING");
-                 if(n.getElem().equals(s))
+                 if(((String) n.getElem()).equals(s))
                      return n;
              }
              else if(n.getElem() instanceof ToDoList)
@@ -39,7 +42,7 @@ public class Tree<E> {
             }
         }
     }
-    return n;
+    return null;
     }
     
     public TreeNode insert(TreeNode n, String s) //inserting a new toDoList, NOTE THE PARAMETERS ARE TREENODE OBJECTS!!!
@@ -65,10 +68,13 @@ public class Tree<E> {
     public TreeNode insert(String s) //inserting a new category of toDoLists
     {
         TreeNode returnVal = null;
-        if(search(s).getElem() != null)
-            System.out.println("Use a unique name for this category");
+        if(search(s) != null && search(s).getElem() != null)
+            System.out.println("Use a unique name for this category" + s + search(s).getElem());
         else
+        {
             returnVal = anchor.addChild((E) s);
+            //System.out.println("e");
+        }
         return returnVal;
     }
     
@@ -111,6 +117,7 @@ public class Tree<E> {
     public String toString()
     {
         String s = "NEW TREE \n";
+        //System.out.println(anchor.getAllChildren().get(anchor.getAllChildren().size() - 1).getElem()); //should be WORK, not SCHOOL
         for(TreeNode t : anchor.getAllChildren())
         {
             s += "CATEGORY: " + t.getElem() + "; ENTRIES: ";

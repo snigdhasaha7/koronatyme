@@ -64,12 +64,19 @@ public class TreeNode <E> {
     public ArrayList<TreeNode<E>> getAllChildren(){
 //        PriorityQueue<TreeNode<E>> local = new PriorityQueue<>(children);
 //        System.out.print(children.peek().getElem());
+        
         ArrayList<TreeNode<E>> localOut = new ArrayList<>();
-        for(int i=0; i < children.size(); i++){
-            int priority = children.getPeekPriority();
+        ArrayList<Integer> priority = new ArrayList<>();
+        int queueSize = children.size();
+        for(int i=0; i < queueSize; i++){
+//            System.out.println(children.toString());
+            priority.add(children.getPeekPriority());
             TreeNode<E> elem = children.poll();
-            localOut.add(priority, elem);
-            children.add(priority, elem);
+//            System.out.println("polled child: "+elem.getElem());
+            localOut.add(elem);
+        }
+        for(int i=0; i<queueSize;i++){
+            children.add(priority.get(i), localOut.get(i));
         }
         return localOut;
     }

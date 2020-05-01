@@ -1,17 +1,13 @@
-
 public class Main {
 /*EXPECTED:
     NEW TREE
     CATEGORY: SCHOOL; ENTRIES:
+    CATEGORY: WORK; ENTRIES:
     
+  BUT WAS
     NEW TREE
     CATEGORY: SCHOOL; ENTRIES:
-    
- WAS:
-    NEW TREE 
     CATEGORY: SCHOOL; ENTRIES:
-    
-    NEW TREE
     */
     public static void main(String[] args) {
         ToDoList a = new ToDoList("Homework");
@@ -24,15 +20,17 @@ public class Main {
         //System.out.println(t.toString());
         //t.insert(new TreeNode(a), "SCHOOL"); //Except INSERTION ERROR: check that you are referring
         //System.out.println(t.toString());
-        t.insert("SCHOOL");
-        System.out.println(t.toString()); //functions correctly
-        System.out.println(t.toString()); //PROBLEM STARTS HERE: tree is now blank
-        
-        
-        //rest of test code
-        /*t.insert("WORK");
+        System.out.println(t.insert("SCHOOL").getElem()); 
+        //System.out.println(t.toString()); 
+        System.out.println(t.insert("WORK").getElem());
+        System.out.println(t.insert("Homework").getElem());
+        System.out.println(t.insert("WORKOUTS").getElem());
+        System.out.println(t.toString()); 
+        /*
         t.insert("LIFE");
         t.insert("HEALTH");
+        
+        /*
         t.insert("LIFE"); //error should occur here
         t.search("NEW CAR"); //null
         t.insert(new TreeNode(a), "SCHOOL");

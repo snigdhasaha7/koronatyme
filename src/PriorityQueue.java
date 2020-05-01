@@ -73,7 +73,9 @@ public class PriorityQueue<E> {
     }
     
     public E poll(){
-        return queue.remove(0).getValue();
+        Entry<E> removed = queue.remove(0);
+//        System.out.println("after removed: " + toString());
+        return removed.getValue();
     }
     
     public Entry dequeueEntry(){
@@ -107,5 +109,16 @@ public class PriorityQueue<E> {
     
     public boolean isEmpty(){
         return size()==0;
+    }
+    
+    @Override
+    public String toString(){
+        String out = "[";
+        for(Entry<E> obj:queue){
+            out += ((TreeNode)(obj.getValue())).getElem() + ",";
+        }
+//        out = out.substring(0, out.length()-1);
+        out += "]";
+        return out;
     }
 }
