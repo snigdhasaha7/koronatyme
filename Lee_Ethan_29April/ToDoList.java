@@ -1,5 +1,4 @@
 import java.util.PriorityQueue;
-//edited
 public class ToDoList {
 	
 	private PriorityQueue<toDoEntry> toDoList;
