@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 //edited
@@ -30,26 +31,25 @@ public class Tree<E> {
                      return n;
              }
              else if(n.getElem() instanceof ToDoList)
-             {
+             {//System.out.println("INSTANCE OF TODO");
                  if(((ToDoList)n.getElem()).getName().equals(s))
                      return n;
              }
-    } else {
+    }
+         
         for (TreeNode child: (ArrayList<TreeNode>) n.getAllChildren()) {
             TreeNode result = search(child, s);
             if (result != null) {
                 return result;
             }
         }
-    }
     return null;
     }
     
-    public TreeNode insert(TreeNode n, String s) //inserting a new toDoList, NOTE THE PARAMETERS ARE TREENODE OBJECTS!!!
+    public TreeNode insert(ToDoList n, String s) //inserting a new toDoList, NOTE THE PARAMETERS ARE TREENODE OBJECTS!!!
     {
         TreeNode returnVal = null;
-        if((((Object)n.getElem()) instanceof ToDoList && !(((ToDoList)n.getElem()).getName().equals(s))
-                && search(s) != null && search(s).getElem() instanceof String))
+        if(!n.getName().equals(s) && search(s) != null && search(s).getElem() instanceof String && search(n.getName()) == null)
         //conditions: n must be a todolist obj, n's name cant be same as s, s must EXIST and it must be a category name
         {
                 returnVal = search(s).addChild(n);
@@ -69,7 +69,7 @@ public class Tree<E> {
     {
         TreeNode returnVal = null;
         if(search(s) != null && search(s).getElem() != null)
-            System.out.println("Use a unique name for this category" + s + search(s).getElem());
+            System.out.println("Use a unique name for this category");
         else
         {
             returnVal = anchor.addChild((E) s);
@@ -81,8 +81,10 @@ public class Tree<E> {
     public TreeNode remove(String s) //you CAN NOT remove the anchor
     {
         TreeNode t = search(s);
+        System.out.println(((ToDoList)(t.getElem())).getName());
         TreeNode parent = t.getParent();
-        parent.removeChild(t);
+        System.out.println(t.getParent().getElem());
+        System.out.println("REMOVED: "+((ToDoList)parent.removeChild(t.getElem())).getName());
         t.setParent(null);
         return t;
     }
@@ -122,7 +124,7 @@ public class Tree<E> {
         {
             s += "CATEGORY: " + t.getElem() + "; ENTRIES: ";
             for(Object n : t.getAllChildren())
-            {
+            { 
                 s += ((ToDoList)((TreeNode) n).getElem()).getName() + ", ";
             }
             s+= "\n";
