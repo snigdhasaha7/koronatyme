@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-//EDITED
 public class PriorityQueue<E> {
 
     
@@ -36,11 +35,23 @@ public class PriorityQueue<E> {
         queue = new ArrayList<>();
     }
 
-    public PriorityQueue(PriorityQueue other) {
+    public PriorityQueue(PriorityQueue<E> other) {
         queue = new ArrayList<>();
-        while(!other.isEmpty()){
-            add(other.dequeueEntry());
+        int otherSize = other.size();
+        for(int i =0; i < other.size(); i++){
+            ArrayList elem = other.dequeueWithPriority();
+//            System.out.println("Im stuck");
+            int priority = ((int)elem.get(0));
+            E elemToAdd = ((E)elem.get(1));
+//            other.add(priority, elemToAdd);
+            other.add(priority, elemToAdd);
+            //System.out.println("other size: " + other.size());
+            add(priority, elemToAdd);
         }
+    }
+    
+    public int getPeekPriority(){
+        return queue.get(0).getKey();
     }
     
     public E peek(){
@@ -49,6 +60,15 @@ public class PriorityQueue<E> {
     
     public E dequeue(){
         return poll();
+    }
+    
+    
+    
+    public ArrayList dequeueWithPriority(){
+        ArrayList out = new ArrayList<>();
+        out.add(queue.get(0).getKey());
+        out.add(queue.remove(0).getValue());
+        return out;
     }
     
     public E poll(){
@@ -61,7 +81,8 @@ public class PriorityQueue<E> {
     
     public void add(E e){
         //queue.add(new Entry(queue.get(queue.size()-1).getKey(), e)); //original line
-        queue.add(new Entry(queue.size(), e));
+        queue.add(new Entry(queue.size(), e)); 
+        //System.out.println(((TreeNode)(queue.get(queue.size() - 1).getValue())).getElem());
     }
     
     public void add(int priority, E e){
