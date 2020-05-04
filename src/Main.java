@@ -42,7 +42,7 @@ public class Main {
         System.out.println(((ToDoList)((TreeNode) t.search("SCHOOL").getAllChildren().get(0)).getElem()).getName()); //Homework
         System.out.println(t.search("Do Nothing")); //null
         t.remove("Art");
-        t.remove("Job Interviews");
+//        t.remove("Job Interviews");
         System.out.println(t.toString());
     }
     
