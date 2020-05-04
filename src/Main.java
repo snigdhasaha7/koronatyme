@@ -20,35 +20,30 @@ public class Main {
         //System.out.println(t.toString());
         //t.insert(new TreeNode(a), "SCHOOL"); //Except INSERTION ERROR: check that you are referring
         //System.out.println(t.toString());
-        System.out.println(t.insert("SCHOOL").getElem()); 
+        t.insert("SCHOOL"); 
         //System.out.println(t.toString()); 
-        System.out.println(t.insert("WORK").getElem());
-        System.out.println(t.insert("Homework").getElem());
-        System.out.println(t.insert("WORKOUTS").getElem());
-        System.out.println(t.toString()); 
-        /*
+        t.insert("WORK");
         t.insert("LIFE");
-        t.insert("HEALTH");
-        
-        /*
+        t.insert("HEALTH");              
         t.insert("LIFE"); //error should occur here
-        t.search("NEW CAR"); //null
-        t.insert(new TreeNode(a), "SCHOOL");
-        t.insert(new TreeNode(b), "WORK");
-        t.insert(new TreeNode(c), "LIFE");
-        t.insert(new TreeNode(d), "HEALTH");
-        t.insert(new TreeNode(e), "SCHOOL"); //error should occur here
-        t.insert(new TreeNode(e), "LIFE"); //error should occur here
-        t.insert(new TreeNode(f), "LIFE");
-        t.search("LIFE").getAllChildren();
-        t.search("Church Events");
-        t.search("Job Interviews");
-        t.search("SCHOOL").getAllChildren();
-        t.search("Do Nothing"); //null
-        /*t.remove("Art");
-        t.search("LIFE").getAllChildren();
-        t.remove("HEALTH");
-        t.search("HEALTH").getAllChildren(); //null*/
+        System.out.println(t.search("NEW CAR")); //null
+        
+        t.insert(a, "SCHOOL");
+        
+        t.insert(b, "WORK");
+        t.insert(c, "LIFE");
+        t.insert(d, "HEALTH");
+        t.insert(e, "SCHOOL"); //error should occur here
+        t.insert(e, "LIFE"); //error should occur here
+        t.insert(f, "LIFE");
+        //System.out.println(t.toString());
+        System.out.println(((ToDoList)t.search("Church Events").getElem()).getName());
+        System.out.println(((ToDoList)t.search("Job Interviews").getElem()).getName());
+        System.out.println(((ToDoList)((TreeNode) t.search("SCHOOL").getAllChildren().get(0)).getElem()).getName()); //Homework
+        System.out.println(t.search("Do Nothing")); //null
+        t.remove("Art");
+        t.remove("Job Interviews");
+        System.out.println(t.toString());
     }
     
      
