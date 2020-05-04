@@ -84,7 +84,7 @@ public class Tree<E> {
         System.out.println(((ToDoList)(t.getElem())).getName());
         TreeNode parent = t.getParent();
         System.out.println(t.getParent().getElem());
-        System.out.println("REMOVED: "+((ToDoList)parent.removeChild(t.getElem())).getName());
+        parent.removeChild(t.getElem());
         t.setParent(null);
         return t;
     }
