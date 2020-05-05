@@ -3,7 +3,7 @@ public class ToDoList {
 	
 	private PriorityQueue<toDoEntry> toDoList;
         private String name; //THIS VARIABLE IS THE ONLY CHANGE I MADE
-        int size = 25000; //IDK why other than to remove the compiler error on lines 36 and 38
+        int size; //IDK why other than to remove the compiler error on lines 36 and 38
 
     public String getName() {
         return name;
@@ -16,7 +16,15 @@ public class ToDoList {
 	public ToDoList(String s)
 	{
 		toDoList = new PriorityQueue(5, new toDoComparator());
+		size = 5;
                 name = s;
+	}
+	
+	public ToDoList(String s, int n) 
+	{
+		toDoList = new PriorityQueue(n, newToDoComparator()); 
+		size = n; 
+		name = s;
 	}
 	
 	public void add(toDoEntry entry)
