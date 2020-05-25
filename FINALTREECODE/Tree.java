@@ -1,23 +1,28 @@
 import java.util.ArrayList;
 
+//LEVEL 0                      ANCHOR (empty)
+//LEVEL 1                      ALL CATEGORIES, which are just strings, nothing more
+//LEVEL 2                      ALL TODO LISTS
+//so category might be "career", and todolists might include "summer job" or "job entrance exams"
+
 public class Tree<E> {
-    private TreeNode<E> anchor;
+    private TreeNode<E> anchor; //anchor is an empty TreeNode, since it would make deletion more convenient and there is no property that justifies a todolist being an anchor
 
     public TreeNode<E> getAnchor() {
         return anchor;
     }
     
     public Tree() {
-        this.anchor = new TreeNode<E>(null, null);
+        this.anchor = new TreeNode<E>(null, null); //for now, we will always construct a Tree obj without parameters, meaning elements will have to be added with separate code
     } 
 
-    public TreeNode<E> getRoot() {
+    public TreeNode<E> getRoot() {//getAnchor, getRoot are the same, just saw it haha
         return anchor;
     }
     
     public TreeNode search(String s)
     {
-        return search(anchor, s);
+        return search(anchor, s);//basically recursive tree search algo, ALWAYS starting at the anchor and traveling down. you can search for both Categories and ToDoLists with the same method
     }
     
     private TreeNode search(TreeNode n, String s)
@@ -35,7 +40,7 @@ public class Tree<E> {
              }
     }
          
-        for (TreeNode child: (ArrayList<TreeNode>) n.getAllChildren()) {
+        for (TreeNode child: (ArrayList<TreeNode>) n.getAllChildren()) { //will always pull an arraylist of the children of anchor when initiating search
             TreeNode result = search(child, s);
             if (result != null) {
                 return result;
@@ -44,9 +49,9 @@ public class Tree<E> {
     return null;
     }
     
-    public TreeNode insert(ToDoList n, String s) //inserting a new toDoList, NOTE THE PARAMETERS ARE TREENODE OBJECTS!!!
+    public TreeNode insert(ToDoList n, String s) //inserting a new TODOLIST (so that you wont have to cast to TreeNode before plugging into params)
     {
-        TreeNode returnVal = null;
+        TreeNode returnVal = null; //return value
         if(!n.getName().equals(s) && search(s) != null && search(s).getElem() instanceof String && search(n.getName()) == null)
         //conditions: n must be a todolist obj, n's name cant be same as s, s must EXIST and it must be a category name
         {
@@ -63,7 +68,7 @@ public class Tree<E> {
             
     }
     
-    public TreeNode insert(String s) //inserting a new category of toDoLists
+    public TreeNode insert(String s) //inserting a new CATEGORY of toDoLists
     {
         TreeNode returnVal = null;
         if(search(s) != null && search(s).getElem() != null)
@@ -75,7 +80,7 @@ public class Tree<E> {
         return returnVal;
     }
     
-    public TreeNode remove(String s) //you CAN NOT remove the anchor
+    public TreeNode remove(String s) //you CAN NOT remove the anchor, you CAN remove both categories and todolists simply with their name, since you can search for both types of objects by name as well
     {
         TreeNode t = search(s);
         TreeNode parent = t.getParent();
@@ -83,8 +88,6 @@ public class Tree<E> {
         t.setParent(null);
         return t;
     }
-    
-//missing insert and search algos
     
     public int getHeight(){
         return childHeight(anchor);
@@ -111,7 +114,7 @@ public class Tree<E> {
         return out;
     }
     
-    public String toString()
+    public String toString() // String format of all info, mostly for testing purposes
     {
         String s = "NEW TREE \n";
         //System.out.println(anchor.getAllChildren().get(anchor.getAllChildren().size() - 1).getElem()); //should be WORK, not SCHOOL
