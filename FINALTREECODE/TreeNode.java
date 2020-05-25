@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-
+//after seeing tree you should understand why treenode exists: so that parent-child properties can work for both Strings and toDolists without modifying the two classes
 public class TreeNode <E> {
     private E elem;
     private PriorityQueue<TreeNode<E>> children;
