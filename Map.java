@@ -1,6 +1,6 @@
 import java.util.LinkedList;
 
-public class Map<toDoEntry> {
+public class Map {
 	
 	//LinkedList 
 	//Array 
@@ -45,7 +45,7 @@ public class Map<toDoEntry> {
 			x += "Key " + i + ": ";
 			for(int j = 0; j < arr[i].size(); j++)
 			{
-				x += "Task: " + ((toDoEntry) arr[i].get(j)).getTask()+ "\n Due Date: " + ((toDoEntry) arr[i].get(j)).getDueDate() + "\n\n"
+				x += "Task: " + ((toDoEntry) arr[i].get(j)).getTask()+ "\n Due Date: " + ((toDoEntry) arr[i].get(j)).getDueDate() + "\n\n";
 				x += "\t"; 
 			}
 			x += "\n";			
