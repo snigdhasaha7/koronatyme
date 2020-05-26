@@ -22,7 +22,7 @@ public class ToDoList {
 	
 	public ToDoList(String s, int n) 
 	{
-		toDoList = new PriorityQueue(n, newToDoComparator()); 
+		toDoList = new PriorityQueue(n, new ToDoComparator()); 
 		size = n; 
 		name = s;
 	}
