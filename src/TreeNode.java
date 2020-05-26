@@ -3,18 +3,18 @@ import java.util.ArrayList;
 //edited
 public class TreeNode <E> {
     private E elem;
-    private PriorityQueue<TreeNode<E>> children;
+    private ArrayList<TreeNode<E>> children;
     private TreeNode<E> parent;
     
     public TreeNode(E elem){
         this.elem = elem;
-        children = new PriorityQueue<>();
+        children = new ArrayList<>();
     }
     
     public TreeNode(E elem, TreeNode<E> parent){
         this.elem = elem;
         this.parent = parent;
-        children = new PriorityQueue<>();
+        children = new ArrayList<>();
     }
 
     public E getElem() {
@@ -30,10 +30,10 @@ public class TreeNode <E> {
 //    }
     
     public TreeNode<E> getFirstChild(){
-        return children.peek();
+        return children.get(0);
     }
 
-    public void setChildren(PriorityQueue<TreeNode<E>> children) {
+    public void setChildren(ArrayList<TreeNode<E>> children) {
         this.children = children;
     }
 
@@ -65,64 +65,26 @@ public class TreeNode <E> {
 //        PriorityQueue<TreeNode<E>> local = new PriorityQueue<>(children);
 //        System.out.print(children.peek().getElem());
         
-        ArrayList<TreeNode<E>> localOut = new ArrayList<>();
-        ArrayList<Integer> priority = new ArrayList<>();
-        int queueSize = children.size();
-        for(int i=0; i < queueSize; i++){
-//            System.out.println(children.toString());
-            priority.add(children.getPeekPriority());
-            TreeNode<E> elem = children.poll();
-//            System.out.println("polled child: "+elem.getElem());
-            localOut.add(elem);
-        }
-        for(int i=0; i<queueSize;i++){
-            children.add(priority.get(i), localOut.get(i));
-        }
-        return localOut;
+        return children;
     }
     
     
     public E removeChild(E in){
         
         ArrayList<TreeNode<E>> elements = new ArrayList<>();
-        ArrayList<Integer> priority = new ArrayList<>();
-        TreeNode<E> out;
-        while(!children.isEmpty()){
-            int peekPriority = children.getPeekPriority();
-            out = children.poll();
-            elements.add(out);
-            priority.add(peekPriority);
-            if(out.getElem().equals(in)){
-                elements.remove(out);
-                priority.remove(priority.size()-1);
-                restoreQueue(priority,elements);
-                return out.getElem();
+        for(int i=0;i<children.size();i++){
+            if(children.get(i).getElem().equals(in)){
+                return children.remove(i).getElem();
             }
         }
-        restoreQueue(priority, elements);
         return null;
-  
-//        ArrayList<TreeNode<E>> children = getAllChildren();
-//        int i = 0;
-//        while(i<numChildren() && !children.get(i).getElem().equals(in)){
-//            i++;
-//        }
-//        if(i>=numChildren()){
-//            return null;
-//        }
-//        return children.remove(i).getElem();
     }
     
     
-    //used as a helper to restore queue in removeChild() method
-    private void restoreQueue(ArrayList<Integer> priority, ArrayList<TreeNode<E>> elements){
-        for(int i = 0; i < priority.size();i++){
-            children.add(priority.get(i), elements.get(i));
-        }
-    }
+
 
     public E removeFirstChild(){
-        if(!children.isEmpty()) return children.poll().getElem();
+        if(!children.isEmpty()) return children.remove(0).getElem();
         return null;
     }
 
