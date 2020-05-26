@@ -33,8 +33,18 @@ public class Map {
 	
 	public boolean contains(toDoEntry value)
 	{
-		int z = Math.abs(value.hashCode()) % 10; 
-		return arr[z].contains(value);
+		for(int i = 0; i < arr.length; i++)
+		{
+			for(int j = 0; j < arr[i].size(); j++)
+			{
+				toDoEntry check = arr[i].get(j); 
+				if(check.getDate().equals(value.getDate()) && check.getTask().equals(value.getTask()) && check.getCategory().equals(value.getCategory()))
+				{
+					return true; 
+				}
+			}
+		}
+		return false;
 	}
 	
 	public String toString() 
